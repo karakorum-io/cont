@@ -51,7 +51,7 @@ func fetUserData(ctx context.Context, userId int) (int, error) {
 	for {
 		select {
 		case <-ctx.Done():
-			return 0, fmt.Errorf("Fetching data from third party took too long ...")
+			return 0, fmt.Errorf("fetching data from third party took too long")
 		case resp := <-respch:
 			return resp.value, resp.err
 		}
