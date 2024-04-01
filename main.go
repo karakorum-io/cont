@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"strconv"
 	"time"
 )
 
@@ -40,7 +41,7 @@ func fetUserData(ctx context.Context, userId int) (int, error) {
 	respch := make(chan Response)
 
 	go func() {
-		val, err := fetchThirdPartyStuffWhichCanBeSlow()
+		val, err := fetchThirdPartyStuffWhichCanBeSlow(userId)
 		respch <- Response{
 			value: val,
 			err:   err,
@@ -57,8 +58,9 @@ func fetUserData(ctx context.Context, userId int) (int, error) {
 	}
 }
 
-func fetchThirdPartyStuffWhichCanBeSlow() (int, error) {
-	time.Sleep(time.Millisecond * 150)
+func fetchThirdPartyStuffWhichCanBeSlow(userId int) (int, error) {
+	fmt.Println("assuming fetching data for userId: " + strconv.Itoa(userId))
 
+	time.Sleep(time.Millisecond * 150)
 	return 666, nil
 }
